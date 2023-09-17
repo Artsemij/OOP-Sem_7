@@ -2,9 +2,11 @@
 // и обновляющий представление
 public class CalculatorController {
 private CalculatorView view;
+private CalculatorLogger logger; // Добавляем логгер
 
 public CalculatorController(CalculatorView view) {
 this.view = view;
+this.logger = CalculatorLogger.getInstance();// Получаем экземпляр логгера
 }
 
 public void start() {
@@ -57,6 +59,7 @@ ComplexNumber operand1 = view.readComplexNumber();
 ComplexNumber operand2 = view.readComplexNumber();
 ComplexNumber result = operand1.add(operand2);
 view.displayResult(result);
+logger.logInfo("Addition: " + operand1 + "+" + operand2 + "=" + result); // информационное сообщение о сложении чисел.
 }
 
 private void performSubtraction() {
@@ -64,6 +67,7 @@ ComplexNumber operand1 = view.readComplexNumber();
 ComplexNumber operand2 = view.readComplexNumber();
 ComplexNumber result = operand1.subtract(operand2);
 view.displayResult(result);
+logger.logInfo("Addition: " + operand1 + "-" + operand2 + "=" + result); // информационное сообщение о вычитании чисел.
 }
 
 private void performMultiplication() {
@@ -71,6 +75,7 @@ ComplexNumber operand1 = view.readComplexNumber();
 ComplexNumber operand2 = view.readComplexNumber();
 ComplexNumber result = operand1.multiply(operand2);
 view.displayResult(result);
+logger.logInfo("Addition: " + operand1 + "*" + operand2 + "=" + result); // информационное сообщение об умножении чисел.
 }
 
 private void performDivision() {
@@ -80,6 +85,7 @@ ComplexNumber result;
 try {
 result = operand1.divide(operand2);
 view.displayResult(result);
+logger.logInfo("Addition: " + operand1 + "/" + operand2 + "=" + result); // информационное сообщение о делении чисел.
 } catch (ArithmeticException e) {
 view.displayErrorMessage("Division by zero is impossible.");
 }
